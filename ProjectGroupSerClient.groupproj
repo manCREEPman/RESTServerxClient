@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{2AE47FA7-1CAF-4192-83A9-6B2366227B7E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ProjectRESTtest.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ClientWin\ProjectRESTclient.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ProjectRESTtest">
+        <MSBuild Projects="ProjectRESTtest.dproj"/>
+    </Target>
+    <Target Name="ProjectRESTtest:Clean">
+        <MSBuild Projects="ProjectRESTtest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProjectRESTtest:Make">
+        <MSBuild Projects="ProjectRESTtest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ProjectRESTclient">
+        <MSBuild Projects="ClientWin\ProjectRESTclient.dproj"/>
+    </Target>
+    <Target Name="ProjectRESTclient:Clean">
+        <MSBuild Projects="ClientWin\ProjectRESTclient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProjectRESTclient:Make">
+        <MSBuild Projects="ClientWin\ProjectRESTclient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ProjectRESTtest;ProjectRESTclient"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ProjectRESTtest:Clean;ProjectRESTclient:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ProjectRESTtest:Make;ProjectRESTclient:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
